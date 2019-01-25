@@ -10,7 +10,6 @@ baseurl: ""
 # If you are building a GitHub project page then use these settings:
 #url: "http://username.github.io/projectname"
 #baseurl: "/projectname"
-
 # Of course don't forget to change the username and projectname to YOUR username and project
 
 # Name of website
@@ -55,8 +54,8 @@ footer-link-col: "#404040"
 # Alternatively, the navbar, footer, and page background can be set to use background images
 # instead of colour
 
-# navbar-img: "/img/bgimage.png"
-# footer-img: "/img/bgimage.png"
+navbar-img: "/img/rainbow.png"
+footer-img: "/img/bleak.png"
 # page-img: "/img/bgimage.png"
 
 # --- Footer options --- #
@@ -71,11 +70,11 @@ author:
 # You can reorder the items to define the link order.
 # If you want to add a new link that isn't here, you'll need to also edit the file _data/SocialNetworks.yml
 social-network-links:
-  rss: true
+#  rss: true
   email: "a.p.smith@leeds.ac.uk"
   github: virgesmith
   twitter: virgesmith
-#  linkedin: 
+  linkedin: "andrew-smith-29ba0"
   stackoverflow: "6672815/virgesmith"
 
 # Select which share links to show in posts
