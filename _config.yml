@@ -76,7 +76,7 @@ social-network-links:
   github: virgesmith
   twitter: virgesmith
 #  linkedin: 
-  stackoverflow: "virgesmith"
+  stackoverflow: "6672815/virgesmith"
 
 # Select which share links to show in posts
 share-links-active:
@@ -144,7 +144,7 @@ title-separator: "-"
 # --- Don't need to touch anything below here (but you can if you want) --- #
 
 # Output options (more information on Jekyll's site)
-timezone: "America/Vancouver"
+timezone: "Europe/London"
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
