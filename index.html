@@ -194,27 +194,15 @@
       
 
 
-  <li class="md-nav__item">
-    <a href="about/" class="md-nav__link">
-      About me
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
-    <label class="md-nav__link" for="nav-2">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" >
+    <label class="md-nav__link" for="nav-1">
       Articles
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Articles" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
+      <label class="md-nav__title" for="nav-1">
         <span class="md-nav__icon md-icon"></span>
         Articles
       </label>
@@ -238,6 +226,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="about/" class="md-nav__link">
+      About me
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -254,6 +254,28 @@
   
     
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#embedding-latex" class="md-nav__link">
+    Embedding \(\LaTeX\)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    Code
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -275,7 +297,20 @@
 <li>The anatomy of a successful research software project</li>
 <li>How not to provide data</li>
 <li>Why computers should never be used to do maths</li>
+<li>Blockchain authentication</li>
+<li>How I make sourdough bread</li>
+<li>Bad algorithms</li>
 </ul>
+<h2 id="embedding-latex">Embedding <span class="arithmatex">\(\LaTeX\)</span><a class="headerlink" href="#embedding-latex" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[
+e^{i\pi}+1=0
+\]</div>
+<h2 id="code">Code<a class="headerlink" href="#code" title="Permanent link">¶</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">n</span>
+  <span class="k">return</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
                 
               
               

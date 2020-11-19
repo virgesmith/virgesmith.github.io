@@ -18,7 +18,7 @@
     
     
       
-        <title>Anatomy of a Successful Research Software Project - Rants and things</title>
+        <title>The anatomy of a successful research software project - Rants and things</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#anatomy-of-a-successful-research-software-project" class="md-skip">
+        <a href="#the-anatomy-of-a-successful-research-software-project" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Anatomy of a Successful Research Software Project
+              The anatomy of a successful research software project
             
           </span>
         </div>
@@ -194,27 +194,15 @@
       
 
 
-  <li class="md-nav__item">
-    <a href="../about/" class="md-nav__link">
-      About me
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
   <li class="md-nav__item md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
-    <label class="md-nav__link" for="nav-2">
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" >
+    <label class="md-nav__link" for="nav-1">
       Articles
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Articles" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
+      <label class="md-nav__title" for="nav-1">
         <span class="md-nav__icon md-icon"></span>
         Articles
       </label>
@@ -238,6 +226,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../about/" class="md-nav__link">
+      About me
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -255,6 +255,96 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#source-control" class="md-nav__link">
+    Source Control
+  </a>
+  
+    <nav class="md-nav" aria-label="Source Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issues-and-project-management" class="md-nav__link">
+    Issues and Project Management
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versioning" class="md-nav__link">
+    Versioning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuous-integration" class="md-nav__link">
+    Continuous Integration
+  </a>
+  
+    <nav class="md-nav" aria-label="Continuous Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#building" class="md-nav__link">
+    Building
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    Testing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    Documentation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#releases" class="md-nav__link">
+    Releases
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#citations" class="md-nav__link">
+    Citations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#communication" class="md-nav__link">
+    Communication
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -270,7 +360,26 @@
                   </a>
                 
                 
-                <h1 id="anatomy-of-a-successful-research-software-project">Anatomy of a Successful Research Software Project<a class="headerlink" href="#anatomy-of-a-successful-research-software-project" title="Permanent link">¶</a></h1>
+                <h1 id="the-anatomy-of-a-successful-research-software-project">The anatomy of a successful research software project<a class="headerlink" href="#the-anatomy-of-a-successful-research-software-project" title="Permanent link">¶</a></h1>
+<p>If you publish research that requires you to write some code to produce results, then you probably (hopefully) put the code in a public repository. Many journals now require, or at the very least, encourage this practice. If you think this alone is enough to make your results reproducible by your peers, then think again.</p>
+<p>Why is this? Here's a few possible reasons another reserarcher might not be able to use your software, and thus replicate your results:</p>
+<ul>
+<li>the code is difficult to install</li>
+<li>it isn't clear how you run the code</li>
+<li>the code doesn't work on their machine</li>
+<li>the code works but the results are different</li>
+</ul>
+<p><img alt="pic" src="./img/anatomy.svg" /></p>
+<h2 id="source-control">Source Control<a class="headerlink" href="#source-control" title="Permanent link">¶</a></h2>
+<h3 id="issues-and-project-management">Issues and Project Management<a class="headerlink" href="#issues-and-project-management" title="Permanent link">¶</a></h3>
+<h2 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">¶</a></h2>
+<h2 id="continuous-integration">Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permanent link">¶</a></h2>
+<h3 id="building">Building<a class="headerlink" href="#building" title="Permanent link">¶</a></h3>
+<h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">¶</a></h3>
+<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">¶</a></h2>
+<h2 id="releases">Releases<a class="headerlink" href="#releases" title="Permanent link">¶</a></h2>
+<h2 id="citations">Citations<a class="headerlink" href="#citations" title="Permanent link">¶</a></h2>
+<h2 id="communication">Communication<a class="headerlink" href="#communication" title="Permanent link">¶</a></h2>
                 
               
               
