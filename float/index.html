@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="http://virgesmith.github.io/float/">
+        <link rel="canonical" href="https://virgesmith.github.io/float/">
       
       
         <meta name="author" content="Andrew P Smith">
@@ -18,7 +18,7 @@
     
     
       
-        <title>Why Computers Should Never be Used for Maths - Rants and things</title>
+        <title>Floating-Point Arithmetic - Random Rants</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#why-computers-should-never-be-used-for-maths" class="md-skip">
+        <a href="#floating-point-arithmetic" class="md-skip">
           Skip to content
         </a>
       
@@ -78,7 +78,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="http://virgesmith.github.io" title="Rants and things" class="md-header-nav__button md-logo" aria-label="Rants and things">
+    <a href="https://virgesmith.github.io" title="Random Rants" class="md-header-nav__button md-logo" aria-label="Random Rants">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -91,11 +91,11 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            Rants and things
+            Random Rants
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Why Computers Should Never be Used for Maths
+              Floating-Point Arithmetic
             
           </span>
         </div>
@@ -165,13 +165,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="http://virgesmith.github.io" title="Rants and things" class="md-nav__button md-logo" aria-label="Rants and things">
+    <a href="https://virgesmith.github.io" title="Random Rants" class="md-nav__button md-logo" aria-label="Random Rants">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    Rants and things
+    Random Rants
   </label>
   
     <div class="md-nav__source">
@@ -215,8 +215,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../test/" class="md-nav__link">
-      An Article About Something
+    <a href="../anatomy/" class="md-nav__link">
+      Anatomy of a successful research software project
     </a>
   </li>
 
@@ -255,6 +255,48 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-ieee754-standard" class="md-nav__link">
+    The IEEE754 Standard
+  </a>
+  
+    <nav class="md-nav" aria-label="The IEEE754 Standard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#epsilon" class="md-nav__link">
+    Epsilon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ordering" class="md-nav__link">
+    Ordering
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -270,8 +312,127 @@
                   </a>
                 
                 
-                <h1 id="why-computers-should-never-be-used-for-maths">Why Computers Should Never be Used for Maths<a class="headerlink" href="#why-computers-should-never-be-used-for-maths" title="Permanent link">¶</a></h1>
-<p>...</p>
+                <h1 id="floating-point-arithmetic">Floating-Point Arithmetic<a class="headerlink" href="#floating-point-arithmetic" title="Permanent link">¶</a></h1>
+<blockquote>
+<p><em>"Computers are an unsuiable tool for doing mathematical computations, and should not be used for such applications"</em></p>
+<p>Famous quote</p>
+</blockquote>
+<p><a href="https://xkcd.com/2295/">XKCD</a> sums it up quite nicely:</p>
+<p><img alt="XKCD on floating point maths" src="../img/xkcd.png" /></p>
+<p>Any software developer who writes numerical code needs to have some understanding of how floating-point numbers are represented, because they are a major source of software bugs and issues. Almost all hardware and software architectures implement the IEEE754 standard. In this chapter I shall explain how a floating-point number is represented using this standard, what the limitations of the format are, and how these can cause some quite nasty software bugs, where the source of errors arise, and how to minimise the impact of these limitations.</p>
+<p>Some people have a tendency to dismiss floating-point issues as "its a rounding error, you get them with floating-point" but that belies a lack fo understanding as to when simply dismisses the potential problem</p>
+<p>Consider this motivating example of a very simple floating-point expression:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">Python 3.7.5 (default, Nov 20 2019, 09:21:52)</span>
+<span class="err">[GCC 9.2.1 20191008] on linux</span>
+<span class="err">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+<span class="err">&gt;&gt;&gt; 0.5-0.4-0.1</span>
+<span class="err">-2.7755575615628914e-17</span>
+<span class="err">&gt;&gt;&gt;</span>
+</code></pre></div>
+
+<p>Feel free to try this in your language/platform of choice, chances are you will get the same wrong answer. So why can't a computer get such a simple sum correct?</p>
+<p>You can just dismiss it as a rounding error and get on with your life. Unless of course you have derivative traders screaming at you because their risk numbers are all over the place and they can't hedge their positions. Turns out the pricing model is a nonlinear optimisation (requiring matrix inversions) with an objective function that's itself a Monte-Carlo simulation. Then you can't.</p>
+<h2 id="the-ieee754-standard">The IEEE754 Standard<a class="headerlink" href="#the-ieee754-standard" title="Permanent link">¶</a></h2>
+<p>Here we will only consider the double precision format, as it's by far the most widely used. Single, half and quad precision all suffer from the same issues. Double-precision floating-point numbers are represented in 64 bits as follows:</p>
+<ul>
+<li>a single sign bit <code>s</code>, with zero representing positive and 1 negative.</li>
+<li>an 11-bit exponent <code>e</code></li>
+<li>a 52-bit mantissa <code>m</code></li>
+</ul>
+<p>The value 1 looks like this in binary:</p>
+<div class="arithmatex">\[\underbrace{\boxed{0}}_s\underbrace{\boxed{01111111111}}_e\underbrace{\boxed{0000000000000000000000000000000000000000000000000000}}_m\]</div>
+<p>In other words,</p>
+<div class="arithmatex">\[ x = \big(-1\big)^{s}.2^{e-1023}.(1 + m/(2^{52})) \]</div>
+<p>The exponent needs some explanation. It is <em>biased</em> by 1023, in other words a value of 1023 represents an exponent of one. It has two special values that are interpreted differently, namely 0 and 2047, which we shall come to later. A value of 1 represents an exponent of <span class="arithmatex">\(2^{-1022}\)</span> or approximately <span class="arithmatex">\(2.23\times10^{-308}\)</span> and a value of 2046 is <span class="arithmatex">\(2^{1023}\)</span> or approximately <span class="arithmatex">\(8.99\times10^{307}\)</span>. Thus the format can represent number over a range of well over 600 decimal orders of magnitude.</p>
+<p>The mantissa is interpreted as a binary number in the range <span class="arithmatex">\(\big[1,2\big)\)</span>, with the leading 1 implied. The bits thus represent the fraction after the decimal point. This is why double precision is often referred to as having 53 bits of precision when the length of the mantissa is actually 52. Something of a moot point when one of those bits is fixed.</p>
+<p>Here are the bit representations of some other numbers</p>
+<table>
+<thead>
+<tr>
+<th align="right">n</th>
+<th>bits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td><span class="arithmatex">\(\boxed{0}\boxed{00000000000}\boxed{0000000000000000000000000000000000000000000000000000}\)</span></td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td><span class="arithmatex">\(\boxed{0}\boxed{10000000000}\boxed{0000000000000000000000000000000000000000000000000000}\)</span></td>
+</tr>
+<tr>
+<td align="right">-1</td>
+<td><span class="arithmatex">\(\boxed{1}\boxed{01111111111}\boxed{0000000000000000000000000000000000000000000000000000}\)</span></td>
+</tr>
+<tr>
+<td align="right">1000000</td>
+<td><span class="arithmatex">\(\boxed{0}\boxed{10000010010}\boxed{1110100001001000000000000000000000000000000000000000}\)</span></td>
+</tr>
+<tr>
+<td align="right">-0.0005</td>
+<td><span class="arithmatex">\(\boxed{1}\boxed{01111110100}\boxed{0000011000100100110111010010111100011010100111111100}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>It is important to understand that the number is represented in <em>binary</em> format, not decimal or any other base. If you consider decimal, the fractions that can be represented <em>exactly</em> in a finite number of decimal digits are with denominator componsed of the prime factors of 10, namely 2 or 5, and products thereof. Thus n/2, n/4, n/5, n/8, n/10, n/16, n/20, n/25 etc., can all be represented exactly in finite precision. For binary, only fractions that have a denominator that is a power of 2 can be represented exactly. Number systems such as sexagesimal evolved largely because it divides easily for a range of denominators. It should be noted that binary (along with any other prime base) is the worst for this.</p>
+<p>Some other points to note:</p>
+<ul>
+<li>all integers that fit into 53 or fewer binary bits (not including the sign bit) can be represented <em>exactly</em> in this format.</li>
+<li>there are representations for both positive and negative zero.</li>
+</ul>
+<h3 id="epsilon">Epsilon<a class="headerlink" href="#epsilon" title="Permanent link">¶</a></h3>
+<p>In this context, <em>epsilon</em> is a measure of the precsion of the format. Specifically, it is the smallest number you can add to to a value of 1 to get a value that is not 1. You can show that it's equivalent to the length of the mantissa. In binary, it is the number we add to increase</p>
+<div class="arithmatex">\[ \boxed{0}\boxed{01111111111}\boxed{0000000000000000000000000000000000000000000000000000} \]</div>
+<p>to</p>
+<div class="arithmatex">\[ \boxed{0}\boxed{01111111111}\boxed{0000000000000000000000000000000000000000000000000001} \]</div>
+<p>We're simply increasing the least significant bit. The difference between the two (see the equation above), is <span class="arithmatex">\(1/2^{52}\)</span>, or about <span class="arithmatex">\(2.22\times10^{-16}\)</span> in decimal. This number is approximately 1.00000000000000022. Another way of looking at this is that we can represent <span class="arithmatex">\(2^{52}\)</span> equally spaced values over the interval of the exponent, which is <span class="arithmatex">\(\big[1,2\big)\)</span>. Thus the difference between successive values is <span class="arithmatex">\(\big(2-1\big)/2^{52}\)</span>.</p>
+<p>Now consider what the smallest value we can <em>subtract</em> from one and not get a different number, we are now in the exponent range <span class="arithmatex">\(\big[0.5,\big)\)</span>, and thus the difference between successive values is halved. This we can represent a value of (approximately) 0.999999999999999889.</p>
+<p>Similarly, for larger numbers the exponent range is greater, and thus the distance between successive value is proportionately larger, but there are always <span class="arithmatex">\(2^{52}\)</span> discrete values available for a given exponent. We'll can define the spacing around any value as follows:</p>
+<div class="arithmatex">\[ \delta\big(x\big) = 2^{\lfloor{log_2\big(x\big)}\rfloor - 52} \]</div>
+<p>Now consider the assignment from string literals:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">Python</span> <span class="mf">3.7</span><span class="o">.</span><span class="mi">5</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Nov</span> <span class="mi">20</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">09</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mi">52</span><span class="p">)</span>
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">9.2</span><span class="o">.</span><span class="mi">1</span> <span class="mi">20191008</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
+<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.18f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
+<span class="mf">0.400000000000000022</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.18f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
+<span class="mf">0.100000000000000006</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div>
+
+<p>As you can see neither 0.4 nor 0.1 are represented exactly, and we can be get error bounds:</p>
+<table>
+<thead>
+<tr>
+<th>Desired x</th>
+<th>Representation of x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.4</td>
+<td><span class="arithmatex">\(0.4 \pm \delta\big(0.4\big)\)</span></td>
+</tr>
+<tr>
+<td>0.1</td>
+<td><span class="arithmatex">\(0.1 \pm \delta\big(0.1\big)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Looking at the binary representations of the values we can see that the only difference is in the exponent:</p>
+<p><span class="arithmatex">\(\boxed{0}\boxed{01111111101}\boxed{1001100110011001100110011001100110011001100110011010}\)</span>
+<span class="arithmatex">\(\boxed{0}\boxed{01111111011}\boxed{1001100110011001100110011001100110011001100110011010}\)</span></p>
+<p>This makes sense since the numbers are exactly two binary orders of magnitude different. Thus the errors in approximating 0.1 must be exactly a quarter of that approximating 0.4.</p>
+<h3 id="ordering">Ordering<a class="headerlink" href="#ordering" title="Permanent link">¶</a></h3>
+<p>+/- zero
+inf
+nan</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">¶</a></h2>
+<p>What every computer scientist should know about floating-point: https://www.itu.dk/~sestoft/bachelor/IEEE754_article.pdf</p>
                 
               
               

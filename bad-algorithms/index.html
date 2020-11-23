@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://virgesmith.github.io/sourdough/">
+        <link rel="canonical" href="https://virgesmith.github.io/bad-algorithms/">
       
       
         <meta name="author" content="Andrew P Smith">
@@ -18,7 +18,7 @@
     
     
       
-        <title>Sourdough Bread - Random Rants</title>
+        <title>Bad algorithms - Random Rants</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sourdough-bread" class="md-skip">
+        <a href="#bad-algorithms" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Sourdough Bread
+              Bad algorithms
             
           </span>
         </div>
@@ -262,77 +262,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#refreshing-the-mother" class="md-nav__link">
-    Refreshing the Mother
+  <a href="#worse-than-exponential-algorithms" class="md-nav__link">
+    Worse-than-exponential algorithms
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#making-the-preferment" class="md-nav__link">
-    Making the preferment
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#making-the-dough" class="md-nav__link">
-    Making the dough
-  </a>
-  
-    <nav class="md-nav" aria-label="Making the dough">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#autolyse" class="md-nav__link">
-    Autolyse
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#knead" class="md-nav__link">
-    Knead
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fold-and-first-proof" class="md-nav__link">
-    Fold and First Proof
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#shape" class="md-nav__link">
-    Shape
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#overnight-retardation" class="md-nav__link">
-    Overnight Retardation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bake" class="md-nav__link">
-    Bake
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#eat" class="md-nav__link">
-    Eat
+  <a href="#references" class="md-nav__link">
+    References
   </a>
   
 </li>
@@ -349,23 +287,71 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/virgesmith/virgesmith.github.io/edit/master/docs/sourdough.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/virgesmith/virgesmith.github.io/edit/master/docs/bad-algorithms.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="sourdough-bread">Sourdough Bread<a class="headerlink" href="#sourdough-bread" title="Permanent link">¶</a></h1>
-<h2 id="refreshing-the-mother">Refreshing the Mother<a class="headerlink" href="#refreshing-the-mother" title="Permanent link">¶</a></h2>
-<h2 id="making-the-preferment">Making the preferment<a class="headerlink" href="#making-the-preferment" title="Permanent link">¶</a></h2>
-<p>(aka spoge)</p>
-<h2 id="making-the-dough">Making the dough<a class="headerlink" href="#making-the-dough" title="Permanent link">¶</a></h2>
-<h3 id="autolyse">Autolyse<a class="headerlink" href="#autolyse" title="Permanent link">¶</a></h3>
-<h3 id="knead">Knead<a class="headerlink" href="#knead" title="Permanent link">¶</a></h3>
-<h2 id="fold-and-first-proof">Fold and First Proof<a class="headerlink" href="#fold-and-first-proof" title="Permanent link">¶</a></h2>
-<h2 id="shape">Shape<a class="headerlink" href="#shape" title="Permanent link">¶</a></h2>
-<h2 id="overnight-retardation">Overnight Retardation<a class="headerlink" href="#overnight-retardation" title="Permanent link">¶</a></h2>
-<h2 id="bake">Bake<a class="headerlink" href="#bake" title="Permanent link">¶</a></h2>
-<h2 id="eat">Eat<a class="headerlink" href="#eat" title="Permanent link">¶</a></h2>
+                <h1 id="bad-algorithms">Bad algorithms<a class="headerlink" href="#bad-algorithms" title="Permanent link">¶</a></h1>
+<p>The Fibonacci sequence is an integer series beginning 0, 1 where every successive digit is the sum of the previous two:</p>
+<div class="arithmatex">\[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55...\]</div>
+<p>The definition</p>
+<div class="arithmatex">\[F\big(n\big) = \left\{\begin{matrix}
+&amp; n &amp; n \in {0,1} \\
+&amp; F\big(n-1\big) + F\big(n-2\big) &amp; n \in \mathbb{Z}^{+} \setminus{1}
+\end{matrix}\right.\]</div>
+<p>lends itself directly to a recursive implementation, e.g. in python:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">fib_recursive</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+  <span class="k">global</span> <span class="n">calls</span>
+  <span class="n">calls</span> <span class="o">=</span> <span class="n">calls</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">n</span>
+  <span class="k">return</span> <span class="n">fib_recursive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_recursive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+
+<p>[file: <strong>src/fib.py</strong>]</p>
+<p>In the python implementation, as python is a dynamically typed language, we need to check that the argument is both a valid type (integral) and a valid value (non-negative). It makes sense to do this only once - the first time the function is called - so the recursive implementation is split into a separate function.</p>
+<p>The rust implementation, thanks to static typing and an unsigned integral type, doesn't require these checks, although it may overflow if <span class="arithmatex">\(n\)</span> is high enough and return an incorrect result.</p>
+<p>However in both cases there is a major problem with the implementation. For each recursive call to <code>fib</code> <strong>two</strong> further calls to the function are made and thus there is a potential for the call stack to grow exponentially. For large <span class="arithmatex">\(n\)</span> this will cause the program to run out of resources very quickly.</p>
+<p>It turns out that, in general, for an input value of <span class="arithmatex">\(n\)</span>, there will be about <span class="arithmatex">\(\phi^n\)</span> calls to <code>fib</code>, where <span class="arithmatex">\(\phi\)</span> is the Golden ratio (~1.618). For example this table illustrates the number of calls to the python implementation for a small range of <span class="arithmatex">\(n\)</span>:</p>
+<p>//$include md output/fib_recursive_table.md</p>
+<p>Or in graphical form, the execution time:</p>
+<p><img alt="" src="../img/fib_recursive_time.png" /></p>
+<p>and the number of calls is clearly the dominant factor causing the execution time:</p>
+<p><img alt="" src="../img/fib_recursive_calls.png" /></p>
+<p>As you can see, for even fairly small n the function is taking prohibitively long to run, and calling itself hundreds of millions of times. In algorithmic complexity terms, this is known as <em>exponential time complexity</em> and should be avoided at all costs. The point I'm trying to make here is that the obvious (but perhaps naiive) implementation of a mathematical function is not always the best approach, and a good (research or otherwise) software engineer should know this.</p>
+<p>So lets try again. Perhaps a better approach would be to compute the entire sequence up to <span class="arithmatex">\(n\)</span> and just return the final value, in python something like:</p>
+<p><code>ERROR src/fib.py (python) too few/many tags (0) for '!fib-array!'</code></p>
+<p>And the execution time is vastly improved:</p>
+<p>{ include_snippet("docs/output/fib_array_table.md") }}</p>
+<!--![](./img/fib_array_time.png)-->
+
+<p>The question is, what does this graph tell us about how the execution time of the array Fibonacci algorithm varies with <span class="arithmatex">\(n\)</span>?. Looking at the code we can see that there is one loop so it would be reasonable to expect that the algorithm is <span class="arithmatex">\(O\big(n\big)\)</span> (it actually is). But the data is very noisy, so how do we determine</p>
+<ol>
+<li>that he behaviour <em>is</em> linear, and</li>
+<li>the slope, so that we can estimate execution time by extrapolation?</li>
+</ol>
+<p>Data scientists would perhaps initially suggest linear regression, others might simply suggest averaging the execution time over multiple runs, but there is a problem with this: the noise is biased. Here's why.</p>
+<p>Modern operating systems run hundreds of processes on hardware that has multiple cores and these processes are competing to consume resources. But CPUs can only run a small number of processes simulteneously, so the operating system has to be able to share the CPU resources between all the processes. Whilst operating systems are cleverly designed to hide all this and provide a smooth user experience, there are limits. I'm sure you've all experienced the slowdowns incurred when a process maximises CPU usage or the system runs low on memory.</p>
+<p>When you are profiling code, however, these effects become much more noticeable, and particularly in interpreted or garbage-collected languages where the language runtime itself could be competing with your code for CPU resources. So using actual time (often called <em>wall time</em>, referring to a wall clock) is a very crude measure of performance. Low-level profiling tools use much more sophisticated metrics including analysis at the hardware level, but these tools require some effort (and sometimes money) to get working, so may not be available to everyone, and may be overkill for a quick benchmark.</p>
+<p>Any program will have a theoretical minimum execution time for a given platform, when (by chance) it is not impeded by competing processes or threads, and this value is really what we are looking for when we want to determine how the values if <span class="arithmatex">\(n\)</span> impacts execution time. So there's a simple solution, instead of <em>averaging</em> multiple runs, we should take the <em>minimum</em> of multiple runs - put another way, we need never to worry about a datapoint <em>underestimating</em> the execution time.</p>
+<p>As you can see from the red points in the graph below, there is a much clearer linear signal emerging using only 3 runs:</p>
+<!--[](./img/fib_array_time_min3.png)-->
+
+<p>TODO extrapolation is dangerous...</p>
+<p>The only drawback of the array Fibonacci algorithm is that the amount of storage required to compute the value grows with <span class="arithmatex">\(n\)</span>, and all the intermediate results are discarded. Specifically, this algorithm has both <em>linear time compexity</em> and <em>linear space complexity</em>, since both the number of operations and the amount of storage is proportional to <span class="arithmatex">\(n\)</span>. If we were calculating terms in the sequence for lots of very large <span class="arithmatex">\(n\)</span> this could potentially be problematic with storage: there could potentially be a lot of redundant computation and duplication of data, plus a lot of repeated memory allocations and deallocations will impact performance.</p>
+<p>Since there is only one sequence, a better approach could be to have a single cached sequence that is extended as necessary. In C++ you could implement it like so:</p>
+<p>{ include_snippet("src/fib.cpp", "fib-cached") }}</p>
+<p>However, if you tried a similar approach in rust, you would encounter a very unhappy compiler. It's worth looking into the reasons why this is the case. Basically, this code is not threadsafe. Imagine that it's being called roughly simultaneously by two threads, each requiring different values. Let's say thread 1 calls the function asking for the 100th number in the sequence, and the cache contains only 50 values. It will resize the cache to 101 and start to compute the missing values. Now thread 2 might enter the function whilst this is happening, and want the 75th value in the sequence. It will check the cache size and decide it can simply return the approriate value. The problem is, we don't actually know whether that value has been computed yet, so the result may be wrong, or it may (by luck) be correct if thread 1 has got that far.</p>
+<p>This is an example of <em>undefined behaviour</em>. Programs like this are not deterministic as it's impossible to say where individual threads will be relative to each other during program execution. The results may or may not be incorrect, the program may even crash, and debugging is extremely difficult as it's often impossible to consistently reproduce an error.</p>
+<p>Undefined behaviour is perhaps <em>the</em> prime motive for the development of rust. The rust compiler is extremely strict and this strictness enables it to detect many situations where undefined behaviour may arise. For this reason rust is often considered a difficult language to learn, especially for those coming from more forgiving languages. All I can say is it's worth it. Even if you go back to your old, more forgiving, language you will look at your code in a new, more defensive, light.</p>
+<p>We could fix the problem in the C++ code above by blocking multiple threads entering the function (using a construct called a mutex lock). But this is likely to result in degraded performance, and more complicated code, which has a maintenance overhead.</p>
+<p>The days when it was quicker to cache simple computations (reading precomputed random numbers from a file was once a thing!) are way behind us. The increase in CPU performance over that last decades has been even greater than those memory or even disk performance.</p>
+<p>So perhaps the best solution might be simpler... going back to the definition, we see that we don't need to store every term, we only need the previous two terms in order to compute the next term. So we should be able to write an algorithm that is linear in time complexity and constant in space complexity.</p>
+<h2 id="worse-than-exponential-algorithms">Worse-than-exponential algorithms<a class="headerlink" href="#worse-than-exponential-algorithms" title="Permanent link">¶</a></h2>
+<p>Perversely I wanted to explore how could implement something even more insanely inefficient than an exponential time algorithm so I had an idea...</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">¶</a></h2>
+<p>Dasgupta, Papadimitriou and Vazirani, Algorithms, McGraw-Hill, 2008. ISBN 978-0-07-352340-8</p>
                 
               
               
