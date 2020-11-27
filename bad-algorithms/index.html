@@ -282,18 +282,12 @@
     Multiplication
   </a>
   
-    <nav class="md-nav" aria-label="Multiplication">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    
-  </a>
-  
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#exponentiation" class="md-nav__link">
+    Exponentiation
+  </a>
   
 </li>
         
@@ -408,18 +402,12 @@
     Multiplication
   </a>
   
-    <nav class="md-nav" aria-label="Multiplication">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    
-  </a>
-  
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#exponentiation" class="md-nav__link">
+    Exponentiation
+  </a>
   
 </li>
         
@@ -513,7 +501,7 @@
 </table>
 <p>In graphical form it's clear that execution time in terms of <span class="arithmatex">\(n\)</span> is linear <em>on a log scale</em> and thus growing <strong>exponentially</strong>:</p>
 <p><img alt="fib_recursive" src="../img/fib_recursive_time.png" /></p>
-<p>If you compute the slope, it's about ~1.618, a.k.a the Golden ratio <span class="arithmatex">\(\phi\)</span> which just happens to be the value the that ratio of successive values in the sequence tends to.  </p>
+<p>If you compute the slope, it's about ~1.618, a.k.a the Golden ratio <span class="arithmatex">\(\phi\)</span> which just happens to be the value the that the ratio of successive values in the sequence tends to.</p>
 <p>As you can see, for even fairly small <span class="arithmatex">\(n\)</span> the function is taking prohibitively long to run. The number of times the function is actually called for a given value of <span class="arithmatex">\(n\)</span> is a close relation of the sequence itself (unsurprisingly):</p>
 <div class="arithmatex">\[C\big(n\big) = \left\{\begin{matrix}
 &amp; 1 &amp; n \in {0,1} \\
@@ -521,7 +509,7 @@
 \end{matrix}\right.\]</div>
 <p>which is larger than <span class="arithmatex">\(F\)</span> but grows at exactly the same rate, <span class="arithmatex">\(\phi\)</span>.</p>
 <p>In algorithmic complexity terms, this is known as <em>exponential time complexity</em> and should be avoided at all costs. The point I'm trying to make here is that the obvious (but perhaps naiive) implementation of a mathematical function is not always the best approach, and a good (research or otherwise) software engineer should know this.</p>
-<p>So lets try again. Python has a feature called <em>generators</em> which are ideal for computing sequences. The generator holds hold some state, and the next time you call it, it just picks up where it left off (the <code>yield</code> statement - this construct is known as a <em>coroutine</em>). You could implement is like this:</p>
+<p>So let's try again. Python has a feature called <em>generators</em> which are ideal for computing sequences. The generator holds hold some state, and the next time you call it, it just picks up where it left off (the <code>yield</code> statement - this construct is known as a <em>coroutine</em>). You could implement is like this:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">fibgen</span><span class="p">():</span>
   <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
   <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -591,7 +579,7 @@
 </tr>
 </tbody>
 </table>
-<p>The data is a little noiser this time because the execution time is so much faster, but theres a clear linear trend now.</p>
+<p>The data is a little noisier this time because the execution time is so much faster, but there's a clear linear trend now:</p>
 <p><img alt="fib_generator" src="../img/fib_generator_time.png" /></p>
 <p>So, we've started with a worse-than-polynomial <span class="arithmatex">\(O(\phi^n)\)</span> algorithm and turned it into an <span class="arithmatex">\(O(n)\)</span> one. Great!</p>
 <h2 id="worse-than-exponential-algorithms">Worse-than-exponential algorithms<a class="headerlink" href="#worse-than-exponential-algorithms" title="Permanent link">¶</a></h2>
@@ -694,21 +682,8 @@
 <p><img alt="add" src="../img/hyper_add.png" /></p>
 <h4 id="multiplication">Multiplication<a class="headerlink" href="#multiplication" title="Permanent link">¶</a></h4>
 <p>This time with the <span class="arithmatex">\(y\)</span> axis as the square root of the execution time, again we see the expected linear trend, so we've gone from the inbuilt <span class="arithmatex">\(O(1)\)</span> to <span class="arithmatex">\(O(n^2)\)</span>:</p>
-<!--|   n |   mul(n,n) |   Time(ms) |
-|----:|-----------:|-----------:|
-|  20 |        400 |    1.57976 |
-|  40 |       1600 |   11.6971  |
-|  60 |       3600 |   30.1907  |
-|  80 |       6400 |   68.496   |
-| 100 |      10000 |  189.912   |
-| 120 |      14400 |  464.125   |
-| 140 |      19600 |  498.488   |
-| 160 |      25600 |  562.98    |
-| 180 |      32400 |  764.926   |
-| 200 |      40000 | 1034.76    |-->
-
-<p><img alt="add" src="../img/hyper_mul.png" /></p>
-<h5 id="_1"><a class="headerlink" href="#_1" title="Permanent link">¶</a></h5>
+<p><img alt="mul" src="../img/hyper_mul.png" /></p>
+<h4 id="exponentiation">Exponentiation<a class="headerlink" href="#exponentiation" title="Permanent link">¶</a></h4>
 <p>And for exponentiation, you can see the runtime is increasing rapidly with <span class="arithmatex">\(n\)</span>:</p>
 <table>
 <thead>
@@ -757,7 +732,7 @@
 </tbody>
 </table>
 <p>and plotting what data we can get, with the y axis on a log scale, shows a linear trend:</p>
-<p><img alt="add" src="../img/hyper_exp.png" /></p>
+<p><img alt="exp" src="../img/hyper_exp.png" /></p>
 <p>Already the run time is trying my patience, but now I've worked out my algorithms give the right answer and perform as badly as expected, and also that this laptop can do about 3 million succession operations per second. So how does tetration perform?</p>
 <h2 id="hyperexponential-complexity">Hyperexponential complexity<a class="headerlink" href="#hyperexponential-complexity" title="Permanent link">¶</a></h2>
 <p><span class="arithmatex">\(2^{2^{2^2}} = 2\uparrow\uparrow4 = 65\,536\)</span> takes about 20ms to calculate.</p>

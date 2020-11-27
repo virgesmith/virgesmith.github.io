@@ -359,15 +359,16 @@
                 
                 
                 <h1 id="blockchain-authentication">Blockchain authentication<a class="headerlink" href="#blockchain-authentication" title="Permanent link">¶</a></h1>
-<p>Cryptography, of which authentication is a part, is a thing where you don't <em>ever</em> roll your own. If you do, people will just laugh at you. (After they've hack you, probably). At the risk of people laughing at me, this isn't a here goes...</p>
+<p>Cryptography, of which authentication is a part, is a thing where you don't <em>ever</em> roll your own. If you do, people will just laugh at you. (After they've hacked you, probably). At the risk of people laughing at me, this isn't a here goes...</p>
 <h2 id="crypto-background">Crypto background<a class="headerlink" href="#crypto-background" title="Permanent link">¶</a></h2>
 <h3 id="public-key-cryptography">Public-key cryptography<a class="headerlink" href="#public-key-cryptography" title="Permanent link">¶</a></h3>
+<p><a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm">ECDSA</a></p>
 <h3 id="cryptographic-hashes">Cryptographic hashes<a class="headerlink" href="#cryptographic-hashes" title="Permanent link">¶</a></h3>
+<p><a href="https://en.wikipedia.org/wiki/SHA-2">SHA256</a></p>
 <h2 id="blockchain-background">Blockchain background<a class="headerlink" href="#blockchain-background" title="Permanent link">¶</a></h2>
 <h3 id="crypto-in-blockchain">Crypto in blockchain<a class="headerlink" href="#crypto-in-blockchain" title="Permanent link">¶</a></h3>
 <h3 id="smart-contracts">"Smart" contracts<a class="headerlink" href="#smart-contracts" title="Permanent link">¶</a></h3>
 <h2 id="motivations">Motivations<a class="headerlink" href="#motivations" title="Permanent link">¶</a></h2>
-<p>Data sharing agreements?</p>
 <h2 id="example-application">Example Application<a class="headerlink" href="#example-application" title="Permanent link">¶</a></h2>
 <p>I have a Raspberry Pi with a "Sense HAT" which contains sensors for temperature, pressure and humidity. I've written a little API so that clients can request this information over http, but the ambient conditions in my office are <em>top secret information</em> so I don't want everyone knowing them.</p>
 <p>I've got another Raspberry Pi that wants to know what the ambient conditions are (2 metres away), but since this is <em>highly sensitive information</em> it wants to ensure that the response it gets is genuine.</p>
