@@ -267,6 +267,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-1-population-data" class="md-nav__link">
+    Example 1: Population data
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -283,6 +298,87 @@
                 
                 
                 <h1 id="how-not-to-supply-data">How Not to Supply Data<a class="headerlink" href="#how-not-to-supply-data" title="Permanent link">¶</a></h1>
+<p>If you provide packaged, versioned, well-documented software as part of your academic output, then you make your work much more easily reproducible (see <a href="../anatomy/">my previous post</a>). However, if that software needs some input data to do its thing, then you also need to apply the same principles <em>to the data</em>: somebody with a different dataset wont be able to produce your results, despite having identical software.</p>
+<p>Step 1 is to you cite all your data sources, but often the raw data will need some form of preprocessing to be useful. And how often is this transparent? You download a spreadsheet, copy and paste some data into a new spreadsheet, apply some formulas, change some names, then save it as a csv file. This is completely opaque and if any misinterpretations or errors creep in then they are hidden.</p>
+<p>In an ideal world data providers would provide their data in directly usable formats, but how can they anticipate all the possible needs of their consumers? Realistically, <em>some</em> preprocessing will be required</p>
+<p>Too often data providers conflate visualisation (i.e. presentation to human viewers) and the data itself, which makes the data harder to extract programatically.</p>
+<p>Too often data providers supply data in proprietary formats...</p>
+<h2 id="example-1-population-data">Example 1: Population data<a class="headerlink" href="#example-1-population-data" title="Permanent link">¶</a></h2>
+<p>Say we need population projections by for England by local authority, sex and (5-year) age group. We'd like it in some non-proprietary format that we could load straight into (e.g.) python or R and do something with it. A csv file will do just fine for this.</p>
+<p>ONS produce this data, and here's the 2018 numbers from <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationprojections/datasets/localauthoritiesinenglandtable2">their website</a>. It's an Excel spreadsheet:</p>
+<p><img alt="2018 SNPP spreadsheet" src="../img/snpp_xls.png" /></p>
+<p>The obvious question that springs to mind is: what audience  is this aimed at? It's got all sorts of features like frozen rows, formatted text, comma-number separators than suggest it's been designed for humans to pore over. Really? But who gets insight directly from huge tables of numbers, surely they'd visualise it graphically in some way? It seems to be in some no-man's land between user-friendliness and process-friendliness.</p>
+<p>To get the exact dataset I want I could do the following:</p>
+<ul>
+<li>delete the first six rows of the <em>Males</em> worksheet</li>
+<li>delete all the rows where the <em>AGE GROUP</em> column value is "All ages", otherwise I'll double-count the numbers</li>
+<li>delete all the rows where the <em>AREA</em> column value is a country, a region or a county, to avoid more double-counting</li>
+<li>create a new column called <em>SEX</em> and fill it with (e.g.) "M"</li>
+<li>remove the comma-separator formatting from the numbers and the "freeze columns" setting</li>
+<li>copy the remaining contents into a new worksheet</li>
+<li>repeat all the steps above in the <em>Females</em> worksheet, but adding (e.g.) "F" in the new <em>SEX</em> column</li>
+<li>copy this to the new sheet, below the male data</li>
+<li>save the new worksheet as a csv file</li>
+</ul>
+<p>As data goes, this isn't particularly messy or unstructured, yet I have to go though some fairly tedious, manual and error-prone steps to get the data exactly as I need it. And if I'm using this data to generate some published results, do I really want people to have to repeat these steps to replicate my work? I could detail the manual preprocessing steps in the text, but it detracts somewhat from the impact of the paper. Another possibility is I could publish the preprocessed data and reference it in my paper. But if it transpires there is an error in the original data, which gets corrected, then neither I, not my readers, get the correction.</p>
+<p>Perhaps a better solution would be to automate the steps I took, and packages like <em>pandas</em> (for python) are perfect for this, although there's a few hoops to jump though:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># ONS spreadsheet</span>
+
+<span class="c1"># 2018 SNPP 5y</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.ons.gov.uk/file?uri=</span><span class="si">%2f</span><span class="s2">peoplepopulationandcommunity</span><span class="si">%2f</span><span class="s2">populationandmigration</span><span class="si">%2f</span><span class="s2">populationprojections</span><span class="si">%2f</span><span class="s2">datasets</span><span class="si">%2f</span><span class="s2">localauthoritiesinenglandtable2</span><span class="si">%2f</span><span class="s2">2018based/table2.xls&quot;</span>
+
+<span class="c1"># reading url directly gives 403, have to use requests with an acceptable user-agent string</span>
+<span class="c1"># data = pd.read_excel(url) # fails</span>
+<span class="c1"># which requests (by default)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> error&quot;</span><span class="p">)</span>
+  <span class="n">exit</span><span class="p">()</span>
+</code></pre></div>
+
+<p>then we process the data</p>
+<div class="codehilite"><pre><span></span><code><span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">tab</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Persons&quot;</span><span class="p">]:</span> <span class="c1"># [&quot;Males&quot;, &quot;Females&quot;]:</span>
+
+  <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">tab</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+  <span class="c1"># get totals for checking I filtered correctly</span>
+  <span class="n">totals</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;AGE GROUP&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;All ages&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;CODE&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;E92000001&quot;</span><span class="p">)]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+  <span class="c1"># remove duplicate age counts</span>
+  <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;AGE GROUP&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;All ages&quot;</span><span class="p">]</span>
+
+  <span class="c1"># remove non-LAD counts</span>
+  <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;CODE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^E0[6789]*&#39;</span><span class="p">)]</span>
+
+  <span class="c1"># get totals for each year</span>
+  <span class="n">annual_sums</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;CODE&quot;</span><span class="p">,</span> <span class="s2">&quot;AREA&quot;</span><span class="p">,</span> <span class="s2">&quot;AGE GROUP&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+  <span class="n">annual_totals</span> <span class="o">=</span> <span class="n">totals</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;CODE&quot;</span><span class="p">,</span> <span class="s2">&quot;AREA&quot;</span><span class="p">,</span> <span class="s2">&quot;AGE GROUP&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+  <span class="c1">#assert annual_sums.equals(annual_totals)</span>
+
+  <span class="c1">#print(data.drop([&quot;CODE&quot;, &quot;AREA&quot;, &quot;AGE GROUP&quot;], axis=1).sum() - totals.drop([&quot;CODE&quot;, &quot;AREA&quot;, &quot;AGE GROUP&quot;], axis=1).iloc[0])</span>
+
+  <span class="n">data</span><span class="p">[</span><span class="s2">&quot;SEX&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+  <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</code></pre></div>
+
+<p>explain that this breaks if the URL becomes stale, so still not a perfect solution.</p>
+<p>APIs</p>
+<p>Nomisweb...</p>
+<p>https://www.nomisweb.co.uk/api/v01/dataset/NM_31_1.data.tsv?geography=1811939329...1811939332,1811939334...1811939336,1811939338...1811939497,1811939499...1811939501,1811939503,1811939505...1811939507,1811939509...1811939517,1811939519,1811939520,1811939524...1811939570,1811939575...1811939599,1811939601...1811939628,1811939630...1811939634,1811939636...1811939647,1811939649,1811939655...1811939664,1811939667...1811939680,1811939682,1811939683,1811939685,1811939687...1811939704,1811939707,1811939708,1811939710,1811939712...1811939717,1811939719,1811939720,1811939722...1811939730,1811939757...1811939767&amp;date=latestMINUS1&amp;sex=5,6&amp;age=1...19&amp;measures=20100</p>
+<p>Schemas</p>
+<p>DOIs for data</p>
+<p>https://dataingovernment.blog.gov.uk/2020/11/10/we-want-your-feedback-on-using-the-doi-standard-in-government/</p>
+<p>Still relying on supplier not to change data/format. At least you can say it not your fault</p>
                 
               
               

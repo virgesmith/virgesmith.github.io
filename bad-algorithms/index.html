@@ -583,7 +583,7 @@
 <p><img alt="fib_generator" src="../img/fib_generator_time.png" /></p>
 <p>So, we've started with a worse-than-polynomial <span class="arithmatex">\(O(\phi^n)\)</span> algorithm and turned it into an <span class="arithmatex">\(O(n)\)</span> one. Great!</p>
 <h2 id="worse-than-exponential-algorithms">Worse-than-exponential algorithms<a class="headerlink" href="#worse-than-exponential-algorithms" title="Permanent link">¶</a></h2>
-<p>You don't hear much about such things, I suppose largely because they're utterly impractical. I haven't come across any problems that <em>require</em> such algorithms, but I'm sure plenty must exist.</p>
+<p>You don't hear much about such things, I suppose largely because they're utterly impractical. Apart from travelling salesman-type problems which have a brute-force <span class="arithmatex">\(O(n!)\)</span> complexity, I haven't really come across any problems that <em>require</em> such algorithms, but I'm sure plenty must exist.</p>
 <p>So, perversely I decided to explore how I could contrive to solve simple problems with hopelessly inefficient algorithms and try and work out how long operations would take using them. Obviously actually running, and even testing, them is largely impractical.</p>
 <h3 id="hyperoperations"><a href="https://en.wikipedia.org/wiki/Hyperoperation">Hyperoperations</a><a class="headerlink" href="#hyperoperations" title="Permanent link">¶</a></h3>
 <p>Starting two integers <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>, we formulate arithmetic operations on them as a chain of binary operations starting with the basic operation of incrementing ("succession"):</p>
@@ -646,7 +646,7 @@
 <span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
   <span class="n">m_</span> <span class="o">=</span> <span class="n">m</span>
   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">m_</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">m_</span><span class="p">)</span>
   <span class="k">return</span> <span class="n">m</span>
 
 <span class="k">def</span> <span class="nf">pow</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -658,7 +658,7 @@
 <span class="k">def</span> <span class="nf">tet</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
   <span class="n">m_</span> <span class="o">=</span> <span class="n">m</span>
   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">m_</span><span class="p">,</span><span class="n">m</span><span class="p">)</span> <span class="c1"># note switch of args</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">m_</span><span class="p">,</span><span class="n">m</span><span class="p">)</span> <span class="c1"># note args switched</span>
   <span class="k">return</span> <span class="n">m</span>
 
 <span class="k">def</span> <span class="nf">pen</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -695,49 +695,45 @@
 </thead>
 <tbody>
 <tr>
-<td align="right">2</td>
-<td align="right">4</td>
-<td align="right">0.00739098</td>
-</tr>
-<tr>
-<td align="right">3</td>
-<td align="right">27</td>
-<td align="right">0.0143051</td>
-</tr>
-<tr>
 <td align="right">4</td>
 <td align="right">256</td>
-<td align="right">0.151634</td>
+<td align="right">0.310421</td>
 </tr>
 <tr>
 <td align="right">5</td>
 <td align="right">3125</td>
-<td align="right">2.05684</td>
+<td align="right">2.46119</td>
 </tr>
 <tr>
 <td align="right">6</td>
 <td align="right">46656</td>
-<td align="right">46.7787</td>
+<td align="right">30.9212</td>
 </tr>
 <tr>
 <td align="right">7</td>
 <td align="right">823543</td>
-<td align="right">1068.86</td>
+<td align="right">311.033</td>
 </tr>
 <tr>
 <td align="right">8</td>
 <td align="right">16777216</td>
-<td align="right">18738.8</td>
+<td align="right">4973.39</td>
+</tr>
+<tr>
+<td align="right">9</td>
+<td align="right">387420489</td>
+<td align="right">112083</td>
 </tr>
 </tbody>
 </table>
-<p>and plotting what data we can get, with the y axis on a log scale, shows a linear trend:</p>
+<p>and since the number of operations grows with <span class="arithmatex">\(n^n\)</span>, we plot the execution time against <span class="arithmatex">\(\ln(t)/\ln(n)\)</span>:</p>
 <p><img alt="exp" src="../img/hyper_exp.png" /></p>
-<p>Already the run time is trying my patience, but now I've worked out my algorithms give the right answer and perform as badly as expected, and also that this laptop can do about 3 million succession operations per second. So how does tetration perform?</p>
+<p>Already the performance is <em>worse</em> than the brute-force Travelling Salesman at <span class="arithmatex">\(O(n^n) &gt; O(n!)\)</span> and is trying my patience, but now I've worked out my algorithms give the right answer and perform as badly as expected, and also that this laptop can do about 3 million succession operations per second. So how does tetration perform?</p>
 <h2 id="hyperexponential-complexity">Hyperexponential complexity<a class="headerlink" href="#hyperexponential-complexity" title="Permanent link">¶</a></h2>
-<p><span class="arithmatex">\(2^{2^{2^2}} = 2\uparrow\uparrow4 = 65\,536\)</span> takes about 20ms to calculate.</p>
+<p>We can think of the previous example as "hyperquadratic" complexity <span class="arithmatex">\(O(n\uparrow\uparrow2)\)</span>, analgous to quadratic complexity in the family of polynomial complexities. What about tetration? Here's some (extrapolated) execution times:</p>
+<p><span class="arithmatex">\(2^{2^{2^2}} = 2\uparrow\uparrow4 = 65\,536\)</span> took about 20ms to calculate.</p>
 <p><span class="arithmatex">\(3^{3^3} = 3\uparrow\uparrow3 = 7\,625\,597\,484\,987\)</span> will take approximately 29 days to compute.</p>
-<p><span class="arithmatex">\(4^{4^4} = 4\uparrow\uparrow3 \approx 1.34 \times 10^{154} \)</span> will take approximately <span class="arithmatex">\(\mathbf{10^{130}}\)</span> <strong>times the age of the universe</strong> to compute.</p>
+<p><span class="arithmatex">\(4^{4^4} = 4\uparrow\uparrow3 \approx 1.34 \times 10^{154} \)</span> will take around <span class="arithmatex">\(\mathbf{10^{130}}\)</span> <strong>times the age of the universe</strong> to compute.</p>
 <p>But if you're in a hurry, <code>python -c "print(4**4**4)"</code> will give you the answer instantaneously &#128521;.</p>
 <p>I'd better stop there. I've replaced perfectly good constant-time algorithms with pathologically inefficient linear, quadratic, exponential (and worse) ones. Utterly pointless, but sort of interesting all the same. I'll get my coat...</p>
 <p>If you want to see a mind-boggling example of a hyperoperation at a level that is itself an iterated hyperoperation, check out <a href="https://en.wikipedia.org/wiki/Graham%27s_number">Graham's number</a>.</p>
