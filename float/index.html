@@ -14,15 +14,15 @@
         <meta name="author" content="Andrew P Smith">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.5">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
       
-        <title>Floating-Point Arithmetic - Random Rants</title>
+        <title>Floating-point (ir)reproducibity - Research Reproducibility Ramblings</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.21aed14c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#floating-point-arithmetic" class="md-skip">
+        <a href="#floating-point-irreproducibility" class="md-skip">
           Skip to content
         </a>
       
@@ -78,7 +78,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="https://virgesmith.github.io" title="Random Rants" class="md-header-nav__button md-logo" aria-label="Random Rants">
+    <a href="https://virgesmith.github.io" title="Research Reproducibility Ramblings" class="md-header-nav__button md-logo" aria-label="Research Reproducibility Ramblings">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -91,11 +91,11 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            Random Rants
+            Research Reproducibility Ramblings
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Floating-Point Arithmetic
+              Floating-point (ir)reproducibity
             
           </span>
         </div>
@@ -165,13 +165,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://virgesmith.github.io" title="Random Rants" class="md-nav__button md-logo" aria-label="Random Rants">
+    <a href="https://virgesmith.github.io" title="Research Reproducibility Ramblings" class="md-nav__button md-logo" aria-label="Research Reproducibility Ramblings">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    Random Rants
+    Research Reproducibility Ramblings
   </label>
   
     <div class="md-nav__source">
@@ -193,10 +193,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" >
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" checked>
     <label class="md-nav__link" for="nav-1">
       Articles
       <span class="md-nav__icon md-icon"></span>
@@ -208,6 +210,111 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Floating-point (ir)reproducibity
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Floating-point (ir)reproducibity
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-ieee754-standard" class="md-nav__link">
+    The IEEE754 Standard
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reproducibility" class="md-nav__link">
+    Reproducibility
+  </a>
+  
+    <nav class="md-nav" aria-label="Reproducibility">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    Algorithms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform" class="md-nav__link">
+    Platform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardware" class="md-nav__link">
+    Hardware
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-the-differences" class="md-nav__link">
+    Why the differences
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#true-story" class="md-nav__link">
+    True story
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-summary" class="md-nav__link">
+    In summary
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
         
           
           
@@ -278,19 +385,40 @@
     The IEEE754 Standard
   </a>
   
-    <nav class="md-nav" aria-label="The IEEE754 Standard">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reproducibility" class="md-nav__link">
+    Reproducibility
+  </a>
+  
+    <nav class="md-nav" aria-label="Reproducibility">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#epsilon" class="md-nav__link">
-    Epsilon
+  <a href="#algorithms" class="md-nav__link">
+    Algorithms
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ordering" class="md-nav__link">
-    Ordering
+  <a href="#platform" class="md-nav__link">
+    Platform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardware" class="md-nav__link">
+    Hardware
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-the-differences" class="md-nav__link">
+    Why the differences
   </a>
   
 </li>
@@ -301,8 +429,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    References
+  <a href="#true-story" class="md-nav__link">
+    True story
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-summary" class="md-nav__link">
+    In summary
   </a>
   
 </li>
@@ -324,30 +459,24 @@
                   </a>
                 
                 
-                <h1 id="floating-point-arithmetic">Floating-Point Arithmetic<a class="headerlink" href="#floating-point-arithmetic" title="Permanent link">¶</a></h1>
-<blockquote>
-<p><em>"Computers are an unsuiable tool for doing mathematical computations, and should not be used for such applications"</em></p>
-<p>Famous quote</p>
-</blockquote>
-<p><a href="https://xkcd.com/2295/">XKCD</a> sums it up quite nicely:</p>
+                <h1 id="floating-point-irreproducibility">Floating-point (ir)reproducibility<a class="headerlink" href="#floating-point-irreproducibility" title="Permanent link">¶</a></h1>
+<p>I'm going to show that even if you have identical data, software and OS, you <em>still</em> can't guarantee reproducibility across instances, at least when it comes to floating-point calculations. <a href="https://xkcd.com/2295/">XKCD</a> sums it up quite nicely:</p>
 <p><img alt="XKCD on floating point maths" src="../img/xkcd.png" /></p>
-<p>Any software developer who writes numerical code needs to have some understanding of how floating-point numbers are represented, because they are a major source of software bugs and issues. Almost all hardware and software architectures implement the IEEE754 standard. In this chapter I shall explain how a floating-point number is represented using this standard, what the limitations of the format are, and how these can cause some quite nasty software bugs, where the source of errors arise, and how to minimise the impact of these limitations.</p>
-<p>Some people have a tendency to dismiss floating-point issues as "its a rounding error, you get them with floating-point" but that belies a lack fo understanding as to when simply dismisses the potential problem</p>
-<p>Consider this motivating example of a very simple floating-point expression:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">Python 3.7.5 (default, Nov 20 2019, 09:21:52)</span>
-<span class="err">[GCC 9.2.1 20191008] on linux</span>
+<p>Any software developer who writes numerical code needs to have some understanding of how floating-point numbers are represented, because they are a major source of software bugs and issues. Some people have a tendency to either assume the computer can't possibly get simple maths (slightly) wrong, or dismiss floating-point issues as rounding errors. Firstly, consider this motivating example of a very simple floating-point expression:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">Python 3.8.5 (default, Jul 28 2020, 12:59:40)</span>
+<span class="err">[GCC 9.3.0] on linux</span>
 <span class="err">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
 <span class="err">&gt;&gt;&gt; 0.5-0.4-0.1</span>
 <span class="err">-2.7755575615628914e-17</span>
-<span class="err">&gt;&gt;&gt;</span>
 </code></pre></div>
 
 <p>Feel free to try this in your language/platform of choice, chances are you will get the same wrong answer. So why can't a computer get such a simple sum correct?</p>
-<p>You can just dismiss it as a rounding error and get on with your life. Unless of course you have derivative traders screaming at you because their risk numbers are all over the place and they can't hedge their positions. Turns out the pricing model is a nonlinear optimisation (requiring matrix inversions) with an objective function that's itself a Monte-Carlo simulation. Then you can't.</p>
+<p>So you can <em>assume</em> it's a small and systematic (i.e easily reproducible) error and live with it, but if (<a href="#true-story">for example</a>) you have derivatives traders screaming at you because their risk numbers are all over the place and they can't hedge their positions, you can't just accept it. The problem is, floating-point errors don't always stay small, and they aren't always easily reproducible.</p>
+<p>I strongly recommend reading <a href="https://www.itu.dk/~sestoft/bachelor/IEEE754_article.pdf">What Every Computer Scientist Should Know About Floating-Point Arithmetic</a>. Now I'll try to explain the non-zero answer above.</p>
 <h2 id="the-ieee754-standard">The IEEE754 Standard<a class="headerlink" href="#the-ieee754-standard" title="Permanent link">¶</a></h2>
 <p>Here we will only consider the double precision format, as it's by far the most widely used. Single, half and quad precision all suffer from the same issues. Double-precision floating-point numbers are represented in 64 bits as follows:</p>
 <ul>
-<li>a single sign bit <code>s</code>, with zero representing positive and 1 negative.</li>
+<li>a sign bit <code>s</code>, with zero representing positive and 1 negative.</li>
 <li>an 11-bit exponent <code>e</code></li>
 <li>a 52-bit mantissa <code>m</code></li>
 </ul>
@@ -355,9 +484,11 @@
 <div class="arithmatex">\[\underbrace{\boxed{0}}_s\underbrace{\boxed{01111111111}}_e\underbrace{\boxed{0000000000000000000000000000000000000000000000000000}}_m\]</div>
 <p>In other words,</p>
 <div class="arithmatex">\[ x = \big(-1\big)^{s}.2^{e-1023}.(1 + m/(2^{52})) \]</div>
-<p>The exponent needs some explanation. It is <em>biased</em> by 1023, in other words a value of 1023 represents an exponent of one. It has two special values that are interpreted differently, namely 0 and 2047, which we shall come to later. A value of 1 represents an exponent of <span class="arithmatex">\(2^{-1022}\)</span> or approximately <span class="arithmatex">\(2.23\times10^{-308}\)</span> and a value of 2046 is <span class="arithmatex">\(2^{1023}\)</span> or approximately <span class="arithmatex">\(8.99\times10^{307}\)</span>. Thus the format can represent number over a range of well over 600 decimal orders of magnitude.</p>
-<p>The mantissa is interpreted as a binary number in the range <span class="arithmatex">\(\big[1,2\big)\)</span>, with the leading 1 implied. The bits thus represent the fraction after the decimal point. This is why double precision is often referred to as having 53 bits of precision when the length of the mantissa is actually 52. Something of a moot point when one of those bits is fixed.</p>
-<p>Here are the bit representations of some other numbers</p>
+<p>The exponent bits need some explanation. It is <em>biased</em> by 1023, in other words a bit value of 1023 represents an exponent of zero. It also has two special values that are interpreted differently, namely 0 (subnormals) and 2047 (infinity and NaN), which we won't cover here. A value of 1 represents an exponent of <span class="arithmatex">\(2^{-1022}\)</span> or approximately <span class="arithmatex">\(2.23\times10^{-308}\)</span> and a value of 2046 is <span class="arithmatex">\(2^{1023}\)</span> or approximately <span class="arithmatex">\(8.99\times10^{307}\)</span>. Thus the format can represent number over a range of well over 600 decimal orders of magnitude.</p>
+<p>The mantissa is interpreted as a <em>binary</em> number in the range <span class="arithmatex">\(\big[1,2\big)\)</span>, with the leading 1 implied. The bits thus represent the fraction after the decimal point. This is why double precision is often referred to as having 53 bits of precision when the length of the mantissa is actually 52. Something of a moot point when one of those bits is fixed.</p>
+<p>The fact the mantissa is binary means that <em>only rational numbers that have a denominator that's a power of two</em> can be represented in a finite number of digits. This contrasts with base 10, which can represent rational numbers with a denominator that's a combination of powers of 2 <em>and</em> 5, since these are the prime factors of 10.</p>
+<p>So going back to the example above, we can see that neither the exact decimals <span class="arithmatex">\(0.4 = 2/5\)</span> nor <span class="arithmatex">\(0.1 = 1/(2\times5)\)</span> can be represented exactly in binary, but <span class="arithmatex">\(0.5=1/2\)</span> can.</p>
+<p>Here are the bit representations of the numbers in our expression:</p>
 <table>
 <thead>
 <tr>
@@ -367,84 +498,117 @@
 </thead>
 <tbody>
 <tr>
-<td align="right">0</td>
-<td><span class="arithmatex">\(\boxed{0}\boxed{00000000000}\boxed{0000000000000000000000000000000000000000000000000000}\)</span></td>
+<td align="right">0.5</td>
+<td><span class="arithmatex">\(\boxed{0}\boxed{01111111110}\boxed{0000000000000000000000000000000000000000000000000000}\)</span></td>
 </tr>
 <tr>
-<td align="right">2</td>
-<td><span class="arithmatex">\(\boxed{0}\boxed{10000000000}\boxed{0000000000000000000000000000000000000000000000000000}\)</span></td>
+<td align="right">0.4</td>
+<td><span class="arithmatex">\(\boxed{0}\boxed{01111111101}\boxed{1001100110011001100110011001100110011001100110011010}\)</span></td>
 </tr>
 <tr>
-<td align="right">-1</td>
-<td><span class="arithmatex">\(\boxed{1}\boxed{01111111111}\boxed{0000000000000000000000000000000000000000000000000000}\)</span></td>
-</tr>
-<tr>
-<td align="right">1000000</td>
-<td><span class="arithmatex">\(\boxed{0}\boxed{10000010010}\boxed{1110100001001000000000000000000000000000000000000000}\)</span></td>
-</tr>
-<tr>
-<td align="right">-0.0005</td>
-<td><span class="arithmatex">\(\boxed{1}\boxed{01111110100}\boxed{0000011000100100110111010010111100011010100111111100}\)</span></td>
+<td align="right">0.1</td>
+<td><span class="arithmatex">\(\boxed{1}\boxed{01111111011}\boxed{1001100110011001100110011001100110011001100110011010}\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>It is important to understand that the number is represented in <em>binary</em> format, not decimal or any other base. If you consider decimal, the fractions that can be represented <em>exactly</em> in a finite number of decimal digits are with denominator componsed of the prime factors of 10, namely 2 or 5, and products thereof. Thus n/2, n/4, n/5, n/8, n/10, n/16, n/20, n/25 etc., can all be represented exactly in finite precision. For binary, only fractions that have a denominator that is a power of 2 can be represented exactly. Number systems such as sexagesimal evolved largely because it divides easily for a range of denominators. It should be noted that binary (along with any other prime base) is the worst for this.</p>
-<p>Some other points to note:</p>
-<ul>
-<li>all integers that fit into 53 or fewer binary bits (not including the sign bit) can be represented <em>exactly</em> in this format.</li>
-<li>there are representations for both positive and negative zero.</li>
-</ul>
-<h3 id="epsilon">Epsilon<a class="headerlink" href="#epsilon" title="Permanent link">¶</a></h3>
-<p>In this context, <em>epsilon</em> is a measure of the precsion of the format. Specifically, it is the smallest number you can add to to a value of 1 to get a value that is not 1. You can show that it's equivalent to the length of the mantissa. In binary, it is the number we add to increase</p>
-<div class="arithmatex">\[ \boxed{0}\boxed{01111111111}\boxed{0000000000000000000000000000000000000000000000000000} \]</div>
-<p>to</p>
-<div class="arithmatex">\[ \boxed{0}\boxed{01111111111}\boxed{0000000000000000000000000000000000000000000000000001} \]</div>
-<p>We're simply increasing the least significant bit. The difference between the two (see the equation above), is <span class="arithmatex">\(1/2^{52}\)</span>, or about <span class="arithmatex">\(2.22\times10^{-16}\)</span> in decimal. This number is approximately 1.00000000000000022. Another way of looking at this is that we can represent <span class="arithmatex">\(2^{52}\)</span> equally spaced values over the interval of the exponent, which is <span class="arithmatex">\(\big[1,2\big)\)</span>. Thus the difference between successive values is <span class="arithmatex">\(\big(2-1\big)/2^{52}\)</span>.</p>
-<p>Now consider what the smallest value we can <em>subtract</em> from one and not get a different number, we are now in the exponent range <span class="arithmatex">\(\big[0.5,\big)\)</span>, and thus the difference between successive values is halved. This we can represent a value of (approximately) 0.999999999999999889.</p>
-<p>Similarly, for larger numbers the exponent range is greater, and thus the distance between successive value is proportionately larger, but there are always <span class="arithmatex">\(2^{52}\)</span> discrete values available for a given exponent. We'll can define the spacing around any value as follows:</p>
-<div class="arithmatex">\[ \delta\big(x\big) = 2^{\lfloor{log_2\big(x\big)}\rfloor - 52} \]</div>
-<p>Now consider the assignment from string literals:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">Python</span> <span class="mf">3.7</span><span class="o">.</span><span class="mi">5</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Nov</span> <span class="mi">20</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">09</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mi">52</span><span class="p">)</span>
-<span class="p">[</span><span class="n">GCC</span> <span class="mf">9.2</span><span class="o">.</span><span class="mi">1</span> <span class="mi">20191008</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
-<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.4</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.18f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
-<span class="mf">0.400000000000000022</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.18f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
-<span class="mf">0.100000000000000006</span>
-<span class="o">&gt;&gt;&gt;</span>
+<p>What's interesting is that for the second two, only the exponent is different (by 2). The mantissas are identical, and this makes perfect sense when you consider that 0.4 is exactly 4 times 0.1. So if we reorder the operations,</p>
+<div class="codehilite"><pre><span></span><code><span class="err">Python 3.8.5 (default, Jul 28 2020, 12:59:40)</span>
+<span class="err">[GCC 9.3.0] on linux</span>
+<span class="err">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
+<span class="err">&gt;&gt;&gt; 0.5-(0.4+0.1)</span>
+<span class="err">0.0</span>
 </code></pre></div>
 
-<p>As you can see neither 0.4 nor 0.1 are represented exactly, and we can be get error bounds:</p>
-<table>
-<thead>
-<tr>
-<th>Desired x</th>
-<th>Representation of x</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0.4</td>
-<td><span class="arithmatex">\(0.4 \pm \delta\big(0.4\big)\)</span></td>
-</tr>
-<tr>
-<td>0.1</td>
-<td><span class="arithmatex">\(0.1 \pm \delta\big(0.1\big)\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>Looking at the binary representations of the values we can see that the only difference is in the exponent:</p>
-<p><span class="arithmatex">\(\boxed{0}\boxed{01111111101}\boxed{1001100110011001100110011001100110011001100110011010}\)</span>
-<span class="arithmatex">\(\boxed{0}\boxed{01111111011}\boxed{1001100110011001100110011001100110011001100110011010}\)</span></p>
-<p>This makes sense since the numbers are exactly two binary orders of magnitude different. Thus the errors in approximating 0.1 must be exactly a quarter of that approximating 0.4.</p>
-<h3 id="ordering">Ordering<a class="headerlink" href="#ordering" title="Permanent link">¶</a></h3>
-<p>+/- zero
-inf
-nan</p>
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">¶</a></h2>
-<p>What every computer scientist should know about floating-point: https://www.itu.dk/~sestoft/bachelor/IEEE754_article.pdf</p>
+<p>we get the right answer. If you're that interested you can do it manually by first shifting the mantissa bits of 0.1 to the right 2 places
+and then add the two numbers (don't forget the implicit leading 1s) - the rounding errors cancel (to 52 bit precision) and you get exactly 0.5.</p>
+<p>Sadly this kind of intervention - reordering the expression based on the values - isn't going be a very practical generic solution, but it gives some insight and understanding of what's going on under the hood.</p>
+<h2 id="reproducibility">Reproducibility<a class="headerlink" href="#reproducibility" title="Permanent link">¶</a></h2>
+<h3 id="algorithms">Algorithms<a class="headerlink" href="#algorithms" title="Permanent link">¶</a></h3>
+<p>Typical operations that are "numerically unstable" include, but are in no way limited to</p>
+<ul>
+<li>computing a running sum of numbers - as the running total gets larger, so do the rounding errors. See <a href="https://en.wikipedia.org/wiki/Kahan_summation_algorithm">Kahan summation</a> for a solution to this.</li>
+<li>finite differencing - dividing small differences between numbers by another small number</li>
+<li>matrix inversions/solvers - for the reasons above</li>
+</ul>
+<h3 id="platform">Platform<a class="headerlink" href="#platform" title="Permanent link">¶</a></h3>
+<p>Ok, so you understand the limitations of floating point, but surely identical versions of your code will give the same (perhaps slightly wrong) answer wherever you run it? Wrong.</p>
+<p>Firstly the platform (i.e. OS) has an impact. This is typically due to the runtime libraries that your code relies on, and for numeric reproducibility we're talking about the maths library (e.g. <code>libm.so</code>) and specifically how transcendental functions such as <code>exp</code>, <code>log</code>, etc are implemented. The IEEE754 standard doesn't (to my knowledge) mandate for full 52-bit accuracy (due to the performance tradeoff?) and so their accuracy is typically not guaranteed to be the full 52-bit width of the mantissa. This means that different implementations can give slightly different results. And even a difference in the least significant bit of the result can easily bubble up into a much larger error. I've seen it happen many times.</p>
+<h3 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">¶</a></h3>
+<p>Basic arithmetic operations aren't performed by a runtime library, they are implemented extremely efficiently <em>in hardware</em>. Traditionally (on x86) this was done by a x87 floating point coprocessor but is now largely done using vectorised SIMD (<a href="https://en.wikipedia.org/wiki/SIMD">single-instruction-multiple-data</a>) instructions. Things to note:</p>
+<ul>
+<li>the x87 uses an 80-bit internal representation of a double and thus can perform more accurate (internal) computations.</li>
+<li>SIMD floating-point instructions can operate simultaneously on multiple values but do not have the extra precision of the x87.</li>
+<li>SIMD implementations have gone from a 16-byte vector width (e.g. SSE2) to 32 (e.g. AVX) and even 64 (AVX512) on some hardware platforms.</li>
+<li>Newer SIMD implementations contain hardware implementations of some transcendental functions (e.g. <code>exp</code>, <code>sqrt</code>), as well as reciprocals and <em>fused multiply-add</em> operations.</li>
+</ul>
+<p>The wider the vector width you use, the faster your code will run, typically. Many maths libraries (e.g. Intel's <a href="https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/onemkl.html">MKL</a>) contain multiple implementations of algorithms optimised for different architectures and will detect what hardware support is available, and use the best available, unless you explicitly force it to use a specific SIMD architecture.</p>
+<p>So there's potentially a hardware-software interaction that you may not be aware of.</p>
+<p>I'm going to replicate the behaviour of such a library using this C++ code that computes the dot product of a large vector:</p>
+<div class="codehilite"><pre><span></span><code><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iomanip&gt;</span><span class="cp"></span>
+
+<span class="kt">double</span> <span class="nf">dot</span><span class="p">(</span><span class="k">const</span> <span class="kt">double</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">double</span><span class="o">*</span> <span class="n">b</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+  <span class="c1">// tell the compiler to unroll this loop if it can</span>
+  <span class="cp">#pragma omp simd reduction(+:x)</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">x</span><span class="o">/</span><span class="n">n</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">512</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">h</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">size</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="c1">// a values decreasing linearly from 1 to zero</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">generate_n</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">size</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]{</span> <span class="k">return</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">i</span><span class="o">++*</span><span class="n">h</span><span class="p">;</span> <span class="p">});</span>
+
+  <span class="c1">// compute the inner product to self and display the result to full precision</span>
+  <span class="kt">double</span> <span class="n">x0</span> <span class="o">=</span>  <span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">a</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">size</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setprecision</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">x0</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>The C++ compiler handily allows us to control what floating point instructions to use, so I can mimic the behaviour of a third-party maths library that selects the architecture at runtime:</p>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># use the non-vectorised floating-point unit</span>
+g++ -O3 -g src/float.cpp -mfpmath<span class="o">=</span><span class="m">387</span> -o bin/float-387 <span class="o">&amp;&amp;</span> <span class="nb">echo</span> -n x87:<span class="p">;</span> bin/float-387
+<span class="c1"># use 2 double width vector instructions</span>
+g++ -O3 -g src/float.cpp -fopenmp -msse4.2 -o bin/float-sse4.2 <span class="o">&amp;&amp;</span> <span class="nb">echo</span> -n SSE4.2:<span class="p">;</span> bin/float-sse4.2
+<span class="c1"># use 4 double width vector instructions</span>
+g++ -O3 -g src/float.cpp -fopenmp -mavx2 -o bin/float-avx2 <span class="o">&amp;&amp;</span> <span class="nb">echo</span> -n AVX2:<span class="p">;</span> bin/float-avx2
+</code></pre></div>
+
+<p>Here's the output:</p>
+<div class="codehilite"><pre><span></span><code>x87:0.3333342870082561
+SSE4.2:0.3333342870067009
+AVX2:0.3333342870071102
+</code></pre></div>
+
+<h3 id="why-the-differences">Why the differences<a class="headerlink" href="#why-the-differences" title="Permanent link">¶</a></h3>
+<p>This code is simply multiplying and adding. The problem really comes from the adding: as the running sum gets larger, successively adding small values involves greater and greater rounding errors. In the vectorised versions, the loop is <em>unrolled</em> and two or four running sums are maintained (which are themselves summed at the end) so the order of addition is different, and thus rounding errors are different. The differences are admittedly small, but if these were intermediate results, they could easily propagate to large differences in the end result.</p>
+<p>Interestingly, whilst the x87 implementation is potentially the most accurate (due to it's 80-bit internals) it's actually the least accurate because it's single running sum is prone to more rounding errors.</p>
+<h2 id="true-story">True story<a class="headerlink" href="#true-story" title="Permanent link">¶</a></h2>
+<p>The "screaming derivatives trader" was real (ok slightly exaggerated), but we were <em>sometimes</em> getting nonsensical risk numbers from a valuation model that was a nonlinear optimisation (requiring matrix inversions) of an objective function that was itself a Monte-Carlo simulation, and sensitivities calculated by finite-differencing results collated from various nodes on a large compute grid. And the point, as pointed out by XKCD, is that small errors in algorithms like these can accumulate into large ones in the results.</p>
+<p>Eventually, we managed to reproduce the problem and pinpoint two specific machines on the grid that consistently reproduced the problem. Trouble was, not only were they both running identical versions of the software, they were both running the same OS, and they even had identical hardware. The only difference was that one was virtualised, the other "bare metal".</p>
+<p>We were already (painfully) aware that hardware with different SIMD instruction sets could give different results, and that our grid had a range of cores of varying ages, and that we were using a highly optimised third party maths library that would use the best-available SIMD instructions on the hardware, unless otherwise directed, and I <em>thought</em> I had already solved this by forcing the library it to only use SIMD instructions that all of our cores supported (SSSE3 if I recall correctly).</p>
+<p>It turned out that the virtualisation layer was incorrectly reporting what SIMD architecture was on the machine, and so our (actually my) code didn't think it needed to force the issue. But when the code ran, it wasn't using the same SIMD implementation as the rest of the grid, and the risk numbers blew up as a result. Actually fixing this was trivial, but getting to this point - where we knew what on earth was going wrong - took a teeny bit more effort!</p>
+<h2 id="in-summary">In summary<a class="headerlink" href="#in-summary" title="Permanent link">¶</a></h2>
+<ul>
+<li>Achieving exact reproducibility in floating-point computations is hard.</li>
+<li>Reproducibility issues can arise from any of the software, the operating system, <em>or even the hardware</em>, depending on the way your software interacts with it.</li>
+<li>Using SIMD can give you big floating-point performance improvements but at the expense of not getting exactly the same answers. Often, you may not even know what CPU-level instructions you are using, and tracking down the source of differences can be tricky, so it pays to be aware of potential issues.</li>
+<li>Containers (docker) and virtual machines are no less as susceptible: whilst they allow you to ensure the software is exactly reproducible, you still have no control over what hardware they are run on.</li>
+</ul>
                 
               
               
@@ -460,12 +624,33 @@ nan</p>
         
 <footer class="md-footer">
   
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+        
+          <a href="../bad-algorithms/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Bad algorithms
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            &copy 2020 Andrew P Smith
+            &copy 2020-2021 Andrew P Smith
           </div>
         
         Made with
@@ -480,8 +665,8 @@ nan</p>
       
     </div>
     
-      <script src="../assets/javascripts/vendor.7e0ee788.min.js"></script>
-      <script src="../assets/javascripts/bundle.b3a72adc.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({

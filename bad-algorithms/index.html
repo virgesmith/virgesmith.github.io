@@ -14,15 +14,15 @@
         <meta name="author" content="Andrew P Smith">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.5">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
       
-        <title>Bad algorithms - Random Rants</title>
+        <title>Bad algorithms - Research Reproducibility Ramblings</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.21aed14c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
@@ -78,7 +78,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="https://virgesmith.github.io" title="Random Rants" class="md-header-nav__button md-logo" aria-label="Random Rants">
+    <a href="https://virgesmith.github.io" title="Research Reproducibility Ramblings" class="md-header-nav__button md-logo" aria-label="Research Reproducibility Ramblings">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -91,7 +91,7 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            Random Rants
+            Research Reproducibility Ramblings
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
@@ -165,13 +165,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://virgesmith.github.io" title="Random Rants" class="md-nav__button md-logo" aria-label="Random Rants">
+    <a href="https://virgesmith.github.io" title="Research Reproducibility Ramblings" class="md-nav__button md-logo" aria-label="Research Reproducibility Ramblings">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    Random Rants
+    Research Reproducibility Ramblings
   </label>
   
     <div class="md-nav__source">
@@ -210,6 +210,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../float/" class="md-nav__link">
+      Floating-point (ir)reproducibity
+    </a>
+  </li>
+
         
           
           
@@ -518,7 +530,7 @@
 
 <span class="k">def</span> <span class="nf">fib_generator</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
   <span class="n">fg</span> <span class="o">=</span> <span class="n">fibgen</span><span class="p">()</span>
-  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="nb">next</span><span class="p">(</span><span class="n">fg</span><span class="p">)</span> 
+  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="nb">next</span><span class="p">(</span><span class="n">fg</span><span class="p">)</span>
   <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="n">fg</span><span class="p">)</span>
 </code></pre></div>
 
@@ -622,12 +634,12 @@
 <td><span class="arithmatex">\((a, b) \rightarrow \underbrace{a^{a^{\unicode{x22F0}^a}}}_b \equiv a \uparrow \uparrow b\)</span></td>
 </tr>
 <tr>
-<td>4</td>
+<td>5</td>
 <td>Pentation</td>
 <td><span class="arithmatex">\((a, b) \rightarrow a \uparrow^3 b\)</span></td>
 </tr>
 <tr>
-<td>4</td>
+<td>6</td>
 <td>Hexation</td>
 <td><span class="arithmatex">\((a, b) \rightarrow a \uparrow^4 b\)</span></td>
 </tr>
@@ -755,6 +767,20 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
+          <a href="../float/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Floating-point (ir)reproducibity
+              </div>
+            </div>
+          </a>
+        
         
           <a href="../anatomy/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
@@ -778,7 +804,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            &copy 2020 Andrew P Smith
+            &copy 2020-2021 Andrew P Smith
           </div>
         
         Made with
@@ -793,8 +819,8 @@
       
     </div>
     
-      <script src="../assets/javascripts/vendor.7e0ee788.min.js"></script>
-      <script src="../assets/javascripts/bundle.b3a72adc.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
