@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
-     <loc>https://virgesmith.github.io/float/</loc>
+     <loc>https://virgesmith.github.io/anatomy/</loc>
      <lastmod>2021-01-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -8,7 +8,11 @@
      <lastmod>2021-01-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://virgesmith.github.io/anatomy/</loc>
+     <loc>https://virgesmith.github.io/float/</loc>
+     <lastmod>2021-01-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://virgesmith.github.io/difficult-data/</loc>
      <lastmod>2021-01-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
