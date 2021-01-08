@@ -657,7 +657,7 @@
 </tr>
 </tbody>
 </table>
-<p>So each level is just doing <span class="arithmatex">\(b\)</span> iterations of the previous level. And you can keep going forever but you need some unusual mathematical notation. The table above introduces Knuth's <a href="https://en.wikipedia.org/wiki/Knuth%27s_up-arrow_notation">up-arrow</a> notation.</p>
+<p>So each level is just doing <span class="arithmatex">\(b\)</span> iterations of the previous level on <span class="arithmatex">\((a,a)\)</span>, e.g. <span class="arithmatex">\(a\times b\)</span> is <span class="arithmatex">\(b\)</span> iterations of <span class="arithmatex">\(a+a\)</span>. And you can keep going forever but you need some unusual mathematical notation. The table above introduces Knuth's <a href="https://en.wikipedia.org/wiki/Knuth%27s_up-arrow_notation">up-arrow</a> notation.</p>
 <p>I can code up all of these operations in terms of iterated calls to the succession function:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">suc</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
