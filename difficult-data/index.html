@@ -486,12 +486,12 @@
 </code></pre></div>
 
 <p>which produces</p>
-<div class="codehilite"><pre><span></span><code>        CODE           AREA AGE GROUP   2018     2019     2020     2021     2022     2023  ...     2036     2037     2038     2039     2040     2041     2042     2043  SEX
-0  E06000047  County Durham       0-4  13849  13526.5  13343.5  13121.8  12976.9  12939.8  ...  13453.3  13561.5  13672.8  13785.2  13894.1  13992.6  14075.1  14137.3    M
-1  E06000047  County Durham       5-9  15443  15626.6  15524.8  15315.7  15085.3  14677.6  ...  13707.3  13764.3  13837.1  13921.7  14015.8  14119.1  14229.4  14344.3    M
-2  E06000047  County Durham     10-14  14610  14997.3  15386.8  15795.2  15967.3  16157.0  ...  14206.5  14206.9  14219.8  14234.1  14259.6  14298.2  14352.6  14423.7    M
-3  E06000047  County Durham     15-19  15022  14936.7  15001.9  15290.5  15812.4  16310.0  ...  16339.9  16130.7  15999.2  15975.2  15930.3  15898.4  15891.0  15898.2    M
-4  E06000047  County Durham     20-24  18599  18613.4  18657.8  18538.9  18394.5  18291.3  ...  21395.9  21109.8  20755.1  20381.3  20095.5  19787.6  19558.4  19415.6    M
+<div class="codehilite"><pre><span></span><code>        CODE           AREA AGE GROUP   2018     2019     2020     2021     2022  ...     2037     2038     2039     2040     2041     2042     2043  SEX
+0  E06000047  County Durham       0-4  13849  13526.5  13343.5  13121.8  12976.9  ...  13561.5  13672.8  13785.2  13894.1  13992.6  14075.1  14137.3    M
+1  E06000047  County Durham       5-9  15443  15626.6  15524.8  15315.7  15085.3  ...  13764.3  13837.1  13921.7  14015.8  14119.1  14229.4  14344.3    M
+2  E06000047  County Durham     10-14  14610  14997.3  15386.8  15795.2  15967.3  ...  14206.9  14219.8  14234.1  14259.6  14298.2  14352.6  14423.7    M
+3  E06000047  County Durham     15-19  15022  14936.7  15001.9  15290.5  15812.4  ...  16130.7  15999.2  15975.2  15930.3  15898.4  15891.0  15898.2    M
+4  E06000047  County Durham     20-24  18599  18613.4  18657.8  18538.9  18394.5  ...  21109.8  20755.1  20381.3  20095.5  19787.6  19558.4  19415.6    M
 
 [5 rows x 30 columns]
 </code></pre></div>
@@ -521,8 +521,9 @@
 <p>To me, Blockchain technologies seem to be a perfect solution for reproducible data: a <a href="https://en.wikipedia.org/wiki/Blockchain">blockchain</a> is an immutable, persistent, distributed database which would be ideal for storing DOIs, and either the data itself (or a cryptographic hash of it, and a URL).</p>
 <p><a href="https://en.wikipedia.org/wiki/Smart_contract">Smart contracts</a> could be used to encode any preprocessing steps you need to do to the raw data, or as an alternative to an API, and your software would need only to execute the contract to get the exact dataset it requires. Immutability is guaranteed, so local cacheing isn't liable to get out of step with the source data. In your published article, you would simply reference the source dataset and the smart contract that you created (or used) to preprocess the data.</p>
 <p>A technology like <em>interplanetary file system</em> <a href="https://ipfs.io">IPFS</a> could provide the scalability to store the enormous amount of data, potentially making your locally-cached copy of the data part of the database itself.</p>
-<p>For data where access is restricted it can of course be encrypted, and <a href="https://en.wikipedia.org/wiki/Homomorphic_encryption">homomorphic encryption</a> technologies could permit preprocessing of the data to be done securely, operating directly on the encrypted data, and resulting in encrypted preprocessed output. Thus neither the original content <em>or even the preprocessed data</em> is ever revealed to anyone without the encryption keys.</p>
+<p>For data where access is restricted it can of course be encrypted, and <a href="https://en.wikipedia.org/wiki/Homomorphic_encryption">homomorphic encryption</a> technologies could permit preprocessing of the data to be done securely, operating directly on the encrypted data, and resulting in encrypted preprocessed output. Thus neither the original content <em>or even the preprocessed data</em> is ever revealed to anyone without the encryption keys. I've put togther a demo of how this could work, using the above dataset: see <a href="https://github.com/virgesmith/hedfq">hedfq</a>.</p>
 <p>Finally, to make this work smoothly, some form of incentivisation for participants may be required, perhaps something along the lines of a H-index for datasets and the associated preprocessing "smart contracts"?</p>
+<p>But, back in the present, how about a...</p>
 <h2 id="manifesto-for-data-providers">Manifesto for data providers<a class="headerlink" href="#manifesto-for-data-providers" title="Permanent link">¶</a></h2>
 <p>All the effort you have expended to make your software reproducible is wasted if you don't apply the same principles to the data it consumes. This can be tricky when the data is from a third party. You could (should?) name-and-shame them in your work, but perhaps more productive would be to encourage them to adopt some or all of these guidelines:</p>
 <ol>
